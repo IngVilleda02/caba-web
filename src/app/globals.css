@@ -126,6 +126,9 @@ h1, h2, h3 {
     transition: border-color 180ms, background-color 180ms;
   }
   .field::placeholder { color: var(--color-ink-3); }
+  /* iOS/Safari dan al campo de fecha un ancho propio que se sale de su columna */
+  .field-date { display: block; min-width: 0; max-width: 100%; -webkit-appearance: none; appearance: none; min-height: 52px; }
+  .field-date::-webkit-date-and-time-value { text-align: left; }
   .field:focus { outline: none; border-bottom-color: var(--color-caba-500); background: var(--color-sheet); }
 }
 

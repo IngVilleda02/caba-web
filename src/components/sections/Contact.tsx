@@ -75,7 +75,7 @@ export function Contact() {
           >
             <h3 id="visita-t" className="text-[32px] text-ink">Datos para la visita</h3>
             <p className="mt-1 text-[16px] text-ink-2">Al enviar se abre WhatsApp con tu solicitud lista para mandar a nuestro asesor.</p>
-            <div className="mt-7 grid gap-6 sm:grid-cols-2">
+            <div className="mt-7 grid gap-6 sm:grid-cols-2 sm:gap-x-8">
               <div>
                 <label htmlFor="nombre" className={label}>Nombre</label>
                 <input id="nombre" name="nombre" autoComplete="name" required className="field" />
@@ -102,19 +102,24 @@ export function Contact() {
                 <label htmlFor="ubicacion" className={label}>Ubicación de la planta</label>
                 <input id="ubicacion" name="ubicacion" autoComplete="street-address" required placeholder="Parque industrial, calle o ciudad" className="field" />
               </div>
-              <div>
-                <label htmlFor="fecha" className={label}>Fecha preferida {opt}</label>
-                <input id="fecha" name="fecha" type="date" className="field" />
-              </div>
-              <div>
-                <label htmlFor="horario" className={label}>Horario preferido {opt}</label>
-                <select id="horario" name="horario" defaultValue="" className={select}>
-                  <option value="">Cualquier horario</option>
-                  <option value="Mañana (9:00 a 12:00)">Mañana (9:00 a 12:00)</option>
-                  <option value="Mediodía (12:00 a 15:00)">Mediodía (12:00 a 15:00)</option>
-                  <option value="Tarde (15:00 a 18:00)">Tarde (15:00 a 18:00)</option>
-                </select>
-              </div>
+              <fieldset className="min-w-0 border-l-2 border-caba-500 pl-5 sm:col-span-2">
+                <legend className="mb-3 text-[15px] font-semibold text-ink">¿Cuándo te conviene la visita? {opt}</legend>
+                <div className="grid gap-5 sm:grid-cols-2 sm:gap-x-8">
+                  <div className="min-w-0">
+                    <label htmlFor="fecha" className="mb-1 block text-[14px] text-ink-2">Fecha</label>
+                    <input id="fecha" name="fecha" type="date" className="field field-date" />
+                  </div>
+                  <div className="min-w-0">
+                    <label htmlFor="horario" className="mb-1 block text-[14px] text-ink-2">Horario</label>
+                    <select id="horario" name="horario" defaultValue="" className={select}>
+                      <option value="">Cualquier horario</option>
+                      <option value="Mañana (9:00 a 12:00)">Mañana (9:00 a 12:00)</option>
+                      <option value="Mediodía (12:00 a 15:00)">Mediodía (12:00 a 15:00)</option>
+                      <option value="Tarde (15:00 a 18:00)">Tarde (15:00 a 18:00)</option>
+                    </select>
+                  </div>
+                </div>
+              </fieldset>
               <div className="sm:col-span-2">
                 <label htmlFor="necesidad" className={label}>¿Qué necesitas que revisemos?</label>
                 <textarea id="necesidad" name="necesidad" rows={4} required placeholder="Pieza, estructura o ensamble, cantidad aproximada y para cuándo lo necesitas." className="field resize-y" />

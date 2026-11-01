@@ -2,17 +2,25 @@ import Image from "next/image";
 import { clients } from "@/content/projects";
 import { LineIcon } from "@/components/Icons";
 
-/** Escena de planta a todo lo ancho, con velo azul plano. */
+/**
+ * Escena de planta: texto sobre azul plano y la foto a su tamaño real (sin estirarla),
+ * para que se vea nítida. Para cambiarla, reemplaza `photo` por una imagen de ≥1600 px.
+ */
+const photo = { src: "/portfolio/linea-soldadura.webp", width: 660, height: 1280, alt: "Línea de soldadura en una planta automotriz" };
+
 export function PlantScene() {
   return (
-    <section aria-label="En planta" className="relative isolate overflow-hidden bg-blueprint text-white">
-      <Image src="/portfolio/linea-soldadura.webp" alt="Línea de soldadura en una planta automotriz" fill unoptimized sizes="100vw" className="-z-10 object-cover object-[50%_40%] opacity-55" />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-blueprint via-blueprint/75 to-blueprint/10" aria-hidden />
-      <div className="mx-auto flex min-h-[520px] max-w-[1200px] flex-col justify-center px-[max(16px,env(safe-area-inset-left))] py-16 md:min-h-[600px]">
-        <h2 className="max-w-[620px] text-[48px] md:text-[72px]">Hecho para el ritmo de una línea automotriz.</h2>
-        <p className="mt-5 max-w-[520px] text-[18px] text-white/80">
-          Atendemos a empresas automotrices y de manufactura en San Juan del Río y la región, con piezas y equipos que llegan listos para trabajar.
-        </p>
+    <section aria-label="En planta" className="grid-blueprint bg-blueprint text-white">
+      <div className="mx-auto grid max-w-[1200px] gap-10 px-[max(16px,env(safe-area-inset-left))] py-16 md:grid-cols-12 md:items-center md:gap-12 md:py-24">
+        <div className="md:col-span-7">
+          <h2 className="max-w-[620px] text-[48px] md:text-[72px]">Hecho para el ritmo de una línea automotriz.</h2>
+          <p className="mt-5 max-w-[520px] text-[18px] text-white/80">
+            Atendemos a empresas automotrices y de manufactura en San Juan del Río y la región, con piezas y equipos que llegan listos para trabajar.
+          </p>
+        </div>
+        <div className="chamfer chamfer-lg relative mx-auto aspect-[4/5] w-full max-w-[480px] md:col-span-5 md:mx-0 md:justify-self-end">
+          <Image src={photo.src} alt={photo.alt} fill unoptimized sizes="(min-width: 768px) 480px, 100vw" className="object-cover object-[50%_45%]" />
+        </div>
       </div>
     </section>
   );
@@ -38,21 +46,13 @@ export function Why() {
             </div>
           ))}
         </div>
-        <div className="mt-6 grid border border-ink bg-sheet md:grid-cols-2">
-          <div className="p-7 md:p-8">
-            <p className="text-[15px] font-medium text-ink-2">Taller</p>
-            <p className="mt-1 font-display text-[32px] font-semibold leading-tight text-ink">Torno y CNC</p>
-            <p className="mt-1 text-[16px] text-ink-2">Trabajamos con el material que tu proyecto requiere.</p>
-          </div>
-          <div className="border-t border-ink p-7 md:border-l md:border-t-0 md:p-8">
-            <p className="text-[15px] font-medium text-ink-2">Confían en nosotros</p>
-            <ul className="mt-1 flex flex-wrap gap-x-8">
-              {clients.map((c) => (
-                <li key={c} className="font-display text-[32px] font-semibold leading-tight text-ink">{c}</li>
-              ))}
-            </ul>
-            <p className="mt-1 text-[16px] text-ink-2">Industria automotriz</p>
-          </div>
+        <div className="mt-6 border border-ink bg-sheet p-7 md:p-8">
+          <p className="text-[15px] font-medium text-ink-2">Empresas que confían en nosotros</p>
+          <ul className="mt-2 flex flex-wrap gap-x-10 gap-y-2">
+            {clients.map((c) => (
+              <li key={c} className="font-display text-[32px] font-semibold leading-tight text-ink">{c}</li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>

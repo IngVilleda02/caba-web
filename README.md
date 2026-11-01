@@ -25,6 +25,7 @@ Antes de publicar: `npm run check` (tipos + lint + build).
 | Aviso de privacidad | `src/app/aviso-de-privacidad/page.tsx` |
 
 ### Agregar un proyecto
+Para un proyecto ilustrativo con fotos libres de derechos agrega `sample: true`: se muestra con la etiqueta «Proyecto de muestra» y sin cliente.
 1. Guarda las fotos en `public/portfolio/` como `.webp` (~1600 px de ancho).
 2. En `src/content/projects.ts` copia un bloque, cambia título, cliente, resumen, servicios y fotos (con su ancho y alto).
 
@@ -52,6 +53,8 @@ Versiones: `logo-full.svg` (fondo claro), `logo-full-dark.svg` (fondo oscuro), `
 - [ ] Reto y resultado medible de cada proyecto (la ficha solo dice "eficiente"; no se publicó para no inventar datos).
 - [ ] Capacidades del taller: marcas/modelos de torno y CNC, medidas máximas, tolerancias y materiales frecuentes.
 - [ ] Más fotos: piezas maquinadas sueltas, taller y equipo.
+- [ ] Nombres de las empresas que autorizaron aparecer en «Empresas que confían en nosotros» (`clients` en `src/content/projects.ts`).
+- [ ] Foto de línea automotriz de mayor resolución (≥1600 px) para la sección «Hecho para el ritmo…» (`photo` en `Story.tsx`).
 - [ ] Redes sociales y dominio.
 - [ ] Fecha y revisión legal del aviso de privacidad.
 - [ ] Aprobación de la línea "Sitio desarrollado por MIRAI NEXUS" en el pie de página.

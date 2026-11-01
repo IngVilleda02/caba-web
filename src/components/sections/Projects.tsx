@@ -71,7 +71,14 @@ export function Projects() {
                 ))}
               </div>
 
-              <p className="mt-5 text-[15px] text-caba-300">{p.client}, {p.industry.toLowerCase()}</p>
+              <p className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 text-[15px] text-caba-300">
+                {p.sample ? (
+                  <span className="bg-cota px-2 py-0.5 text-[13px] font-semibold text-ink">Proyecto de muestra</span>
+                ) : (
+                  <span>{p.client}</span>
+                )}
+                <span>{p.industry}</span>
+              </p>
               <h3 className="mt-1 text-[34px]">{p.title}</h3>
               <p className="mt-2 text-[16px] text-white/70">{p.summary}</p>
               <ul className="mt-4 flex flex-wrap gap-2" aria-label="Servicios del proyecto">

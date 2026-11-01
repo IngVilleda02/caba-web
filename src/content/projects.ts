@@ -4,11 +4,15 @@ import type { Service } from "./services";
  * Portafolio. Para agregar un proyecto copia un bloque y cambia los datos.
  * Las fotos van en /public/portfolio (WebP de ~1600 px de ancho).
  * Mostrar el nombre del cliente final solo con su autorización.
+ * `sample: true` marca un proyecto ilustrativo (fotos libres de derechos): se muestra con la
+ * etiqueta «Proyecto de muestra» y sin cliente. Reemplázalos por trabajos reales cuando los haya.
  */
 export interface Project {
   slug: string;
   title: string;
   client: string;
+  /** Proyecto ilustrativo: se etiqueta como muestra y no muestra cliente. */
+  sample?: boolean;
   industry: string;
   summary: string;
   services: Service["id"][];
@@ -58,4 +62,5 @@ export const projects: Project[] = [
   },
 ];
 
+/** Empresas que autorizaron aparecer en «Empresas que confían en nosotros». */
 export const clients = ["Topre Autoparts"];
