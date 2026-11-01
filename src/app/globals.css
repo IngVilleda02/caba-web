@@ -129,17 +129,6 @@ h1, h2, h3 {
   .field:focus { outline: none; border-bottom-color: var(--color-caba-500); background: var(--color-sheet); }
 }
 
-/* Intertext: fotos dentro del titular */
-artifact-pill {
-  --artifact-background: var(--color-paper-2);
-  --artifact-radius: 0px;
-  --artifact-focus: var(--color-caba-500);
-  --artifact-easing: var(--ease-out);
-  --artifact-duration: 480ms;
-  vertical-align: -0.06em;
-  clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
-}
-
 /* Cotas sobre la foto principal: se dibujan una sola vez al cargar */
 .cota-line { stroke-dasharray: 220; stroke-dashoffset: 220; animation: cota-draw 900ms var(--ease-out) forwards; animation-delay: var(--d, 300ms); }
 .cota-label { opacity: 0; animation: cota-in 500ms var(--ease-out) forwards; animation-delay: calc(var(--d, 300ms) + 500ms); }

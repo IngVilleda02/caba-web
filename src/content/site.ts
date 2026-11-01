@@ -23,7 +23,7 @@ export const site = {
   phoneDisplay: "+52 427 123 9550",
   phone: "+524271239550",
   whatsapp: "524271239550",
-  whatsappMessage: "Hola CABA, me gustaría solicitar una cotización.",
+  whatsappMessage: "Hola CABA, me gustaría solicitar una visita a planta.",
   hours: {
     label: "Lunes a sábado",
     range: "9:00 a.m. – 6:00 p.m.",

@@ -1,7 +1,7 @@
 # CABA Servicios y Maquinados Industriales — Sitio web
 
 Desarrollado por **MIRAI NEXUS**. Next.js 16 · TypeScript · Tailwind CSS v4.
-Dirección visual: estilo Apple (skill *popular-web-designs*, `apple.md`) adaptado a la marca CABA.
+Dirección visual propia «Plano de taller» (ver abajo).
 
 ## Abrir en tu computadora
 
@@ -28,8 +28,11 @@ Antes de publicar: `npm run check` (tipos + lint + build).
 1. Guarda las fotos en `public/portfolio/` como `.webp` (~1600 px de ancho).
 2. En `src/content/projects.ts` copia un bloque, cambia título, cliente, resumen, servicios y fotos (con su ancho y alto).
 
-## Contacto
-El formulario arma el mensaje y abre WhatsApp con el número de CABA: no necesita servidor ni correo.
+## Solicitud de visita
+CABA cotiza después de visitar la planta. El formulario (`Contact.tsx`, ancla `#visita`) pide nombre, empresa,
+teléfono, ubicación de la planta, servicio, fecha y horario preferidos y la necesidad. Al enviar, `public/site.js`
+arma una plantilla con esos datos y abre WhatsApp con el número del asesor: no necesita servidor ni correo.
+Los enlaces "Solicitar visita para…" de cada servicio preseleccionan el servicio en el formulario.
 Cuando el cliente tenga correo, se puede agregar envío por correo con Resend como en el sitio de MIRAI NEXUS.
 
 ## Logotipo
@@ -59,5 +62,4 @@ Diseño propio derivado del logotipo y del mundo del cliente (no copia de ningun
 - **Cotas amarillas** sobre la foto principal que nombran las piezas, con el amarillo de los fixtures (`Hero.tsx`, arreglo `cotas`).
 - **Retícula de plano** en secciones claras y **azul plano** `#0F2A4D` en las oscuras.
 - **Barlow Condensed** (títulos) + **Barlow** (texto), ambas autoalojadas.
-- **Fotos dentro del titular** con Intertext (`InlineMedia.tsx`): se agrandan con el mouse, el teclado o al tocar.
 - Referencias de la skill popular-web-designs mezcladas: BMW (ángulos, contraste), IBM (entradas con línea inferior, un solo azul), HashiCorp (ritmo claro/oscuro).

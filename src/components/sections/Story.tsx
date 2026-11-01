@@ -62,10 +62,10 @@ export function Why() {
 /** Proceso real en 4 pasos, unido por una línea de cota. */
 export function Process() {
   const steps = [
-    { t: "Cuéntanos qué necesitas", d: "Envíanos plano, muestra o fotos por WhatsApp." },
-    { t: "Recibe tu cotización", d: "Te respondemos rápido con costo y tiempo de entrega." },
-    { t: "Fabricamos", d: "Maquinado, estructura o ensamble con el material acordado." },
-    { t: "Entregamos", d: "Listo para trabajar en tu planta." },
+    { t: "Solicita una visita", d: "Llena el formulario y te contactamos por WhatsApp para agendar." },
+    { t: "Visitamos tu planta", d: "Vemos la necesidad en sitio, tomamos medidas y fotos." },
+    { t: "Recibe tu cotización", d: "Con costo y tiempo de entrega según lo que revisamos." },
+    { t: "Fabricamos y entregamos", d: "Maquinado, estructura o ensamble listo para trabajar." },
   ];
   return (
     <section aria-labelledby="proceso-t" className="bg-sheet py-20 md:py-28">

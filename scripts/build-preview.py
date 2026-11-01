@@ -15,14 +15,16 @@ css = "\n".join(css_parts)
 
 def font_face(m):
     block = m.group(0)
-    url = re.search(r"url\(([^)]+)\)", block)
-    if not url or "-latin-wght" not in url.group(1):
+    # Solo el subconjunto latino (Barlow: barlow-latin-400-normal.*.woff2)
+    url = re.search(r"url\(([^)]*-latin-\d+-normal[^)]*\.woff2)\)", block)
+    if not url:
         return ""
     ref = url.group(1).strip("'\"")
     path = ((nxt / "static/chunks") / ref).resolve() if not ref.startswith("/_next/") else nxt / ref.replace("/_next/", "")
     if not path.exists():
         path = next((nxt / "static").rglob(pathlib.Path(ref).name))
-    return block.replace(url.group(0), f"url(data:font/woff2;base64,{base64.b64encode(path.read_bytes()).decode()})")
+    data = base64.b64encode(path.read_bytes()).decode()
+    return re.sub(r"src:[^;}]*", f'src:url(data:font/woff2;base64,{data}) format("woff2")', block)
 
 css = re.sub(r"@font-face\{[^}]*\}", font_face, css)
 
@@ -43,8 +45,6 @@ body = re.sub(r'(src|data-src)="(/(?:portfolio|brand)/[^"]+)"', lambda m: f'{m.g
 body = body.replace('href="/aviso-de-privacidad"', 'href="#contacto"').replace('href="/"', 'href="#inicio"')
 
 js = (root / "public/site.js").read_text()
-# Componente Intertext (MIT) para las fotos dentro del titular
-pill_js = (root / "node_modules/intertext-dev/dist/lib/artifact-pill.js").read_text().replace("</script", "<\\/script")
 out = f"""<title>CABA Servicios y Maquinados</title>
 <meta name="description" content="Vista previa del sitio de CABA Servicios y Maquinados Industriales.">
 <style>
@@ -53,9 +53,6 @@ html, body {{ background: #eef1f4; color: #14171c; }}
 body {{ overflow-x: clip; }}
 </style>
 {body}
-<script type="module">
-{pill_js}
-</script>
 <script>
 {js}
 </script>

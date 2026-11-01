@@ -1,9 +1,8 @@
 import Image from "next/image";
 import { services } from "@/content/services";
-import { whatsappHref } from "@/content/site";
 import { LineIcon } from "@/components/Icons";
 
-/** Servicios como hojas de especificación: foto en chaflán, título, alcance y enlace a cotizar. */
+/** Servicios como hojas de especificación: foto en chaflán, título, alcance y enlace para solicitar visita. */
 export function Services() {
   return (
     <section id="servicios" className="bg-sheet py-20 md:py-28">
@@ -35,12 +34,11 @@ export function Services() {
                 ))}
               </ul>
               <a
-                href={whatsappHref(`Hola CABA, me interesa cotizar el servicio de ${s.title.toLowerCase()}.`)}
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#visita"
+                data-visit-service={s.title}
                 className="link-line mt-6 self-start text-[16px]"
               >
-                Cotizar {s.title.toLowerCase()}
+                Solicitar visita para {s.title.toLowerCase()}
               </a>
             </article>
           ))}

@@ -85,27 +85,56 @@
     });
   }
 
-  /* Formulario: arma el mensaje y abre WhatsApp (no hay servidor ni correo de por medio) */
+  /* Solicitud de visita: arma una plantilla con lo que escribió el cliente y abre WhatsApp */
   var form = $("[data-wa-form]");
   if (form) {
+    var f = form.elements;
+    var checks = [
+      ["nombre", function (v) { return v.length >= 2; }, "Escribe tu nombre."],
+      ["empresa", function (v) { return v.length >= 2; }, "Escribe el nombre de tu empresa."],
+      ["telefono", function (v) { return v.replace(/\D/g, "").length >= 10; }, "Escribe un teléfono de 10 dígitos para confirmar la visita."],
+      ["ubicacion", function (v) { return v.length >= 3; }, "Indica dónde está la planta."],
+      ["necesidad", function (v) { return v.length >= 5; }, "Cuéntanos qué necesitas que revisemos."],
+    ];
+    function val(n) { return f[n].value.trim(); }
+    function fecha(v) { var p = v.split("-"); return p.length === 3 ? p[2] + "/" + p[1] + "/" + p[0] : v; }
+
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      var f = form.elements, err = $("[data-wa-error]", form);
-      var name = f.nombre.value.trim(), msg = f.mensaje.value.trim();
-      if (name.length < 2 || msg.length < 5) {
-        err.textContent = name.length < 2 ? "Escribe tu nombre." : "Cuéntanos qué necesitas.";
-        (name.length < 2 ? f.nombre : f.mensaje).focus();
-        return;
-      }
+      var err = $("[data-wa-error]", form), bad = null;
+      checks.forEach(function (c) {
+        var ok = c[1](val(c[0]));
+        f[c[0]].setAttribute("aria-invalid", String(!ok));
+        if (!ok && !bad) bad = c;
+      });
+      if (bad) { err.textContent = bad[2]; f[bad[0]].focus(); return; }
       err.textContent = "";
-      var lines = ["Hola CABA, me gustaría una cotización.", "", "Nombre: " + name];
-      if (f.empresa.value.trim()) lines.push("Empresa: " + f.empresa.value.trim());
-      if (f.servicio.value) lines.push("Servicio: " + f.servicio.value);
-      lines.push("", msg);
+
+      var lines = [
+        "*Solicitud de visita a planta*",
+        "",
+        "*Nombre:* " + val("nombre"),
+        "*Empresa:* " + val("empresa"),
+        "*Teléfono:* " + val("telefono"),
+        "*Ubicación de la planta:* " + val("ubicacion"),
+        "*Servicio de interés:* " + (val("servicio") || "Por definir"),
+        "*Fecha preferida:* " + (val("fecha") ? fecha(val("fecha")) : "Por acordar"),
+        "*Horario preferido:* " + (val("horario") || "Cualquier horario"),
+        "",
+        "*Necesidad:*",
+        val("necesidad"),
+        "",
+        "_Enviado desde el sitio web de CABA._",
+      ];
       var url = "https://wa.me/" + form.getAttribute("data-wa-form") + "?text=" + encodeURIComponent(lines.join("\n"));
       window.open(url, "_blank", "noopener");
       var ok = $("[data-wa-ok]", form); ok.hidden = false;
       ok.querySelector("a").href = url;
+    });
+
+    /* Enlaces "Solicitar visita" de cada servicio: preseleccionan el servicio */
+    $$("[data-visit-service]").forEach(function (a) {
+      a.addEventListener("click", function () { f.servicio.value = a.getAttribute("data-visit-service"); });
     });
   }
 

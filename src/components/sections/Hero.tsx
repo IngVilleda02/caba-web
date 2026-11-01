@@ -1,11 +1,9 @@
 import Image from "next/image";
-import { site, whatsappHref } from "@/content/site";
-import { WhatsAppIcon } from "@/components/Icons";
-import { InlineMedia } from "@/components/InlineMedia";
+import { site } from "@/content/site";
 
 /**
- * Héroe «plano de taller»: titular con fotos reales dentro del texto (Intertext)
- * y la foto del carrito anotada con cotas, como una lámina de ingeniería.
+ * Héroe «plano de taller»: titular corto y la foto del carrito anotada con cotas,
+ * como una lámina de ingeniería.
  */
 const cotas = [
   // x, y = punto sobre la pieza (%); lx, ly = posición de la etiqueta (%)
@@ -21,22 +19,13 @@ export function Hero() {
         <div className="lg:col-span-7">
           <p className="text-[17px] font-medium text-caba-600">Taller industrial en {site.city}</p>
           <h1 className="mt-4 text-[52px] text-ink sm:text-[72px] lg:text-[88px]">
-            Piezas,{" "}
-            <InlineMedia src="/portfolio/maquinado-clamps.webp" alt="Brazos de sujeción con placas maquinadas" />{" "}
-            estructuras{" "}
-            <InlineMedia src="/portfolio/cortina-estructura.webp" alt="Estructura de mesa con malla" width="1.4em" />{" "}
-            y ensambles{" "}
-            <InlineMedia src="/portfolio/carrito-vista-superior.webp" alt="Carrito con fixtures ensamblados, vista superior" width="1.5em" />{" "}
-            para la industria automotriz.
+            Maquinados, estructuras y ensambles industriales.
           </h1>
-          <p className="mt-6 max-w-[540px] text-[19px] leading-[1.5] text-ink-2">
-            Fabricamos a la medida de tu planta, con respuesta rápida y costos flexibles. Pasa el cursor o toca las fotos para verlas.
+          <p className="mt-6 max-w-[540px] text-pretty text-[19px] leading-[1.5] text-ink-2">
+            Visitamos tu planta, revisamos la necesidad y te cotizamos a la medida.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
-            <a href={whatsappHref()} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
-              <WhatsAppIcon className="h-[18px] w-[18px]" />
-              Cotizar por WhatsApp
-            </a>
+            <a href="#visita" className="btn btn-primary">Solicitar una visita</a>
             <a href="#proyectos" className="link-line text-[17px]">Ver proyectos</a>
           </div>
         </div>

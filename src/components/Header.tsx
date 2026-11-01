@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { navigation, whatsappHref } from "@/content/site";
+import { navigation } from "@/content/site";
 
 /** Barra superior sobre papel de plano, con regla inferior. Menú móvil en /public/site.js. */
 export function Header({ linkBase = "" }: { linkBase?: string }) {
@@ -21,8 +21,9 @@ export function Header({ linkBase = "" }: { linkBase?: string }) {
           ))}
         </nav>
         <div className="flex items-center gap-2">
-          <a href={whatsappHref()} target="_blank" rel="noopener noreferrer" className="btn btn-primary min-h-10 px-5 text-[15px]">
-            Cotizar
+          <a href={`${linkBase}#visita`} className="btn btn-primary min-h-10 whitespace-nowrap px-4 text-[15px] sm:px-5">
+            <span className="sm:hidden">Visita</span>
+            <span className="hidden sm:inline">Solicitar visita</span>
           </a>
           <button
             type="button"
