@@ -15,7 +15,7 @@ export default async function OG() {
   const photoSrc = `data:image/jpeg;base64,${photo.toString("base64")}`;
   return new ImageResponse(
     (
-      <div style={{ width: "100%", height: "100%", display: "flex", background: "#f5f5f7" }}>
+      <div style={{ width: "100%", height: "100%", display: "flex", background: "#eef1f4" }}>
         <div style={{ width: 560, flexShrink: 0, display: "flex", flexDirection: "column", justifyContent: "center", padding: 64, gap: 36 }}>
           <img src={logoSrc} alt="" width={380} height={215} />
           <div style={{ fontSize: 40, fontWeight: 700, color: "#1d1d1f", lineHeight: 1.15, letterSpacing: -1 }}>

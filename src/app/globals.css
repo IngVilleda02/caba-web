@@ -1,118 +1,159 @@
 @import "tailwindcss";
 
 /* ─────────────────────────────────────────────────────────────
-   CABA · Design tokens
-   Dirección visual: estilo Apple (skill popular-web-designs / apple.md)
-   adaptado a la marca CABA: el azul del logotipo es el único color de acción.
+   CABA · Identidad «Plano de taller»
+   La página se lee como un plano de ingeniería:
+   - Chaflán (tomado de la letra C del logotipo) en fotos y botones.
+   - Cotas amarillas (color de los fixtures) solo para anotar piezas.
+   - Azul CABA = acción · Azul plano = secciones oscuras · Tinta = texto.
+   Referencias de la skill popular-web-designs (mezcladas, no copiadas):
+   BMW (ángulos y contraste), IBM (entradas con línea inferior, un solo azul),
+   HashiCorp (ritmo claro/oscuro).
    ───────────────────────────────────────────────────────────── */
 @theme {
-  /* Superficies claras */
-  --color-canvas: #ffffff;
-  --color-mist: #f5f5f7;        /* secciones alternas (gris azulado, no blanco puro) */
-  --color-mist-2: #e8e8ed;
-  /* Superficies oscuras (vitrina de producto) */
-  --color-night: #000000;
-  --color-night-2: #161617;
-  --color-night-3: #1d1d1f;
-  /* Texto */
-  --color-ink: #1d1d1f;
-  --color-ink-2: #6e6e73;
-  --color-ink-3: #86868b;
-  --color-line: rgb(0 0 0 / 0.08);
-  /* Azul CABA (del logotipo, normalizado) */
-  --color-caba-300: #6fa3ec;    /* enlaces sobre fondo negro */
-  --color-caba-500: #2f66b3;    /* acción principal */
-  --color-caba-600: #24548f;    /* hover / enlaces en texto */
-  --color-caba-50: #eef4fc;
+  --color-paper: #eef1f4;       /* papel de plano, frío */
+  --color-paper-2: #e2e7ec;
+  --color-sheet: #ffffff;
+  --color-ink: #14171c;         /* negro de la banda del logotipo */
+  --color-ink-2: #4a5360;
+  --color-ink-3: #7b8592;
+  --color-rule: #c9d1da;        /* líneas del plano */
+  --color-caba-500: #2f66b3;    /* azul del logotipo: acción */
+  --color-caba-600: #234f8d;
+  --color-caba-300: #8db4ec;
+  --color-blueprint: #0f2a4d;   /* azul plano para secciones oscuras */
+  --color-blueprint-2: #15365f;
+  --color-cota: #f2b705;        /* amarillo de herramental: solo cotas y marcas */
 
-  --font-sans: "Inter Variable", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-
-  --radius-tile: 22px;
-  --radius-media: 18px;
+  --font-display: "Barlow Condensed", "Arial Narrow", system-ui, sans-serif;
+  --font-sans: "Barlow", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-:root {
-  color-scheme: light;
-}
+:root { color-scheme: light; }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 4rem;
-  background: var(--color-canvas);
+  scroll-padding-top: 4.5rem;
+  background: var(--color-paper);
 }
 
 body {
-  background: var(--color-canvas);
+  background: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-sans);
   font-size: 17px;
-  line-height: 1.47;
-  letter-spacing: -0.022em; /* tracking negativo también en cuerpo (ref. Apple) */
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
-  font-feature-settings: "cv11", "ss03";
 }
 
 h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  line-height: 1;
   text-wrap: balance;
-  letter-spacing: -0.03em;
 }
 
-::selection {
-  background: var(--color-caba-500);
-  color: #fff;
-}
+::selection { background: var(--color-caba-500); color: #fff; }
 
-:focus-visible {
-  outline: 2px solid var(--color-caba-500);
-  outline-offset: 3px;
-  border-radius: 6px;
-}
+:focus-visible { outline: 2px solid var(--color-caba-500); outline-offset: 3px; }
 
 @layer components {
-/* Botones píldora (ref. Apple) */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  min-height: 44px;
-  padding: 0 22px;
-  border-radius: 980px;
-  font-size: 17px;
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  transition: background-color 200ms var(--ease-out), color 200ms var(--ease-out), transform 120ms var(--ease-out), border-color 200ms;
+  /* Chaflán: esquina superior izquierda e inferior derecha cortadas, como la C del logotipo */
+  .chamfer { clip-path: polygon(var(--c, 18px) 0, 100% 0, 100% calc(100% - var(--c, 18px)), calc(100% - var(--c, 18px)) 100%, 0 100%, 0 var(--c, 18px)); }
+  .chamfer-sm { --c: 10px; }
+  .chamfer-lg { --c: 28px; }
+
+  /* Retícula de plano */
+  .grid-paper {
+    background-image:
+      linear-gradient(to right, rgb(20 23 28 / 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(20 23 28 / 0.05) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .grid-blueprint {
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.06) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  /* Botones */
+  .btn {
+    --c: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 48px;
+    padding: 0 26px;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: 0.01em;
+    clip-path: polygon(var(--c) 0, 100% 0, 100% calc(100% - var(--c)), calc(100% - var(--c)) 100%, 0 100%, 0 var(--c));
+    transition: background-color 180ms var(--ease-out), color 180ms, transform 120ms var(--ease-out);
+  }
+  .btn:active { transform: scale(0.97); }
+  .btn-primary { background: var(--color-caba-500); color: #fff; }
+  .btn-primary:hover { background: var(--color-caba-600); }
+  .btn-ink { background: var(--color-ink); color: #fff; }
+  .btn-ink:hover { background: #000; }
+
+  /* Enlace de texto con subrayado de taller */
+  .link-line {
+    font-weight: 600;
+    color: var(--color-caba-600);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 5px;
+    text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+    transition: text-decoration-color 180ms;
+  }
+  .link-line:hover { text-decoration-color: currentColor; }
+  .on-dark .link-line { color: var(--color-caba-300); }
+
+  /* Entradas con línea inferior (ref. IBM) */
+  .field {
+    width: 100%;
+    background: var(--color-paper);
+    border: 0;
+    border-bottom: 2px solid var(--color-rule);
+    padding: 14px 14px 12px;
+    font-size: 17px;
+    color: var(--color-ink);
+    transition: border-color 180ms, background-color 180ms;
+  }
+  .field::placeholder { color: var(--color-ink-3); }
+  .field:focus { outline: none; border-bottom-color: var(--color-caba-500); background: var(--color-sheet); }
 }
-.btn:active { transform: scale(0.97); }
-.btn-primary { background: var(--color-caba-500); color: #fff; }
-.btn-primary:hover { background: var(--color-caba-600); }
-.btn-outline { border: 1px solid currentColor; color: var(--color-caba-500); }
-.btn-outline:hover { background: var(--color-caba-500); color: #fff; border-color: var(--color-caba-500); }
-.on-dark .btn-outline { color: var(--color-caba-300); }
-.on-dark .btn-outline:hover { background: var(--color-caba-300); color: #000; border-color: var(--color-caba-300); }
 
-/* Enlace "Más información ›" */
-.link-more { color: var(--color-caba-600); font-size: 17px; }
-.link-more:hover { text-decoration: underline; text-underline-offset: 3px; }
-.on-dark .link-more { color: var(--color-caba-300); }
-
+/* Intertext: fotos dentro del titular */
+artifact-pill {
+  --artifact-background: var(--color-paper-2);
+  --artifact-radius: 0px;
+  --artifact-focus: var(--color-caba-500);
+  --artifact-easing: var(--ease-out);
+  --artifact-duration: 480ms;
+  vertical-align: -0.06em;
+  clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
 }
 
-/* Aparición al hacer scroll (solo para lo que está fuera de pantalla al cargar; ver site.js) */
-.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out); }
-.reveal.is-visible { opacity: 1; transform: none; }
+/* Cotas sobre la foto principal: se dibujan una sola vez al cargar */
+.cota-line { stroke-dasharray: 220; stroke-dashoffset: 220; animation: cota-draw 900ms var(--ease-out) forwards; animation-delay: var(--d, 300ms); }
+.cota-label { opacity: 0; animation: cota-in 500ms var(--ease-out) forwards; animation-delay: calc(var(--d, 300ms) + 500ms); }
+@keyframes cota-draw { to { stroke-dashoffset: 0; } }
+@keyframes cota-in { to { opacity: 1; } }
 
 /* Galería (lightbox) */
 .lightbox[hidden] { display: none; }
-.lightbox { animation: lb-in 240ms var(--ease-out); }
+.lightbox { animation: lb-in 220ms var(--ease-out); }
 @keyframes lb-in { from { opacity: 0; } }
-.lightbox img { animation: lb-img 320ms var(--ease-out); }
-@keyframes lb-img { from { opacity: 0; transform: scale(0.97); } }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .reveal { transform: none; transition: opacity 0.3s; }
-  .lightbox, .lightbox img { animation: none; }
+  .cota-line { animation: none; stroke-dashoffset: 0; }
+  .cota-label { animation: none; opacity: 1; }
+  .lightbox { animation: none; }
 }

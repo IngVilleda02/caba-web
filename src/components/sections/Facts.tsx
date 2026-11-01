@@ -1,20 +1,23 @@
 import { site } from "@/content/site";
 
-/** Franja de datos verificables de la ficha del cliente (nada inventado). */
+/** Datos verificables de la ficha del cliente, como el cuadro de datos de un plano. */
 export function Facts() {
   const facts = [
     { k: site.yearsLabel, v: "de operación" },
-    { k: "A tu medida", v: "material de acuerdo al cliente" },
-    { k: "Respuesta rápida", v: "a soporte y cotizaciones" },
+    { k: "A tu medida", v: "con el material que pidas" },
+    { k: "Respuesta rápida", v: "en soporte y cotizaciones" },
     { k: site.hours.label, v: site.hours.range },
   ];
   return (
-    <section aria-label="Datos de CABA" className="border-b border-line bg-canvas">
-      <dl className="mx-auto grid max-w-[1100px] grid-cols-2 gap-y-8 px-[max(16px,env(safe-area-inset-left))] py-12 md:grid-cols-4">
-        {facts.map((f) => (
-          <div key={f.k} className="px-2 text-center md:border-l md:border-line md:first:border-l-0">
-            <dt className="text-[21px] font-semibold tracking-[-0.02em] text-ink sm:text-[24px]">{f.k}</dt>
-            <dd className="mt-1 text-[14px] text-ink-2">{f.v}</dd>
+    <section aria-label="Datos de CABA" className="border-y border-ink bg-sheet">
+      <dl className="mx-auto grid max-w-[1200px] grid-cols-2 px-[max(16px,env(safe-area-inset-left))] md:grid-cols-4">
+        {facts.map((f, i) => (
+          <div
+            key={f.k}
+            className={`py-7 pr-4 ${i % 2 ? "border-l border-rule pl-5" : ""} ${i > 1 ? "border-t border-rule md:border-t-0" : ""} md:border-l md:border-rule md:pl-6 md:first:border-l-0 md:first:pl-0`}
+          >
+            <dt className="font-display text-[30px] font-semibold leading-none text-ink">{f.k}</dt>
+            <dd className="mt-2 text-[15px] text-ink-2">{f.v}</dd>
           </div>
         ))}
       </dl>

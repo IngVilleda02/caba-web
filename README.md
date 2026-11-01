@@ -52,3 +52,12 @@ Versiones: `logo-full.svg` (fondo claro), `logo-full-dark.svg` (fondo oscuro), `
 - [ ] Redes sociales y dominio.
 - [ ] Fecha y revisión legal del aviso de privacidad.
 - [ ] Aprobación de la línea "Sitio desarrollado por MIRAI NEXUS" en el pie de página.
+
+## Identidad visual «Plano de taller» (rediseño)
+Diseño propio derivado del logotipo y del mundo del cliente (no copia de ninguna marca):
+- **Chaflán** de la letra C del logotipo en fotos, botones y marcadores (`.chamfer` en `globals.css`).
+- **Cotas amarillas** sobre la foto principal que nombran las piezas, con el amarillo de los fixtures (`Hero.tsx`, arreglo `cotas`).
+- **Retícula de plano** en secciones claras y **azul plano** `#0F2A4D` en las oscuras.
+- **Barlow Condensed** (títulos) + **Barlow** (texto), ambas autoalojadas.
+- **Fotos dentro del titular** con Intertext (`InlineMedia.tsx`): se agrandan con el mouse, el teclado o al tocar.
+- Referencias de la skill popular-web-designs mezcladas: BMW (ángulos, contraste), IBM (entradas con línea inferior, un solo azul), HashiCorp (ritmo claro/oscuro).

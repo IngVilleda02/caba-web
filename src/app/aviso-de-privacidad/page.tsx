@@ -8,12 +8,12 @@ export const metadata: Metadata = { title: "Aviso de privacidad", alternates: { 
 
 /** ⚠️ Borrador: revisar con asesor legal antes de publicar y completar la fecha. */
 export default function Privacy() {
-  const h2 = "mt-10 text-[24px] font-semibold text-ink";
+  const h2 = "mt-10 text-[30px] text-ink";
   const a = site.address;
   return (
     <>
       <Header linkBase="/" />
-      <main id="contenido" className="bg-canvas pb-24 pt-[120px]">
+      <main id="contenido" className="bg-sheet pb-24 pt-[120px]">
         <div className="mx-auto max-w-[720px] px-[max(16px,env(safe-area-inset-left))] text-[17px] text-ink-2">
           <h1 className="text-[40px] font-semibold text-ink">Aviso de privacidad</h1>
           <p className="mt-2 text-[14px]">Última actualización: [fecha]</p>
@@ -31,7 +31,7 @@ export default function Privacy() {
           </p>
           <h2 className={h2}>Cambios</h2>
           <p className="mt-2">Cualquier modificación a este aviso se publicará en esta página.</p>
-          <Link href="/" className="link-more mt-12 inline-block">← Volver al inicio</Link>
+          <Link href="/" className="link-line mt-12 inline-block">← Volver al inicio</Link>
         </div>
       </main>
       <Footer linkBase="/" />

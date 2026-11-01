@@ -5,7 +5,6 @@
  */
 (function () {
   "use strict";
-  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var $ = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
 
@@ -124,13 +123,4 @@
     } catch { status.hidden = true; }
   }
 
-  /* Aparición suave solo para lo que está fuera de pantalla al cargar */
-  if (!reduced && "IntersectionObserver" in window) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add("is-visible"); io.unobserve(en.target); } });
-    }, { rootMargin: "0px 0px -8% 0px" });
-    $$("[data-reveal]").forEach(function (el) {
-      if (el.getBoundingClientRect().top > window.innerHeight) { el.classList.add("reveal"); io.observe(el); }
-    });
-  }
 })();

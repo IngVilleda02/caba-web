@@ -43,14 +43,19 @@ body = re.sub(r'(src|data-src)="(/(?:portfolio|brand)/[^"]+)"', lambda m: f'{m.g
 body = body.replace('href="/aviso-de-privacidad"', 'href="#contacto"').replace('href="/"', 'href="#inicio"')
 
 js = (root / "public/site.js").read_text()
+# Componente Intertext (MIT) para las fotos dentro del titular
+pill_js = (root / "node_modules/intertext-dev/dist/lib/artifact-pill.js").read_text().replace("</script", "<\\/script")
 out = f"""<title>CABA Servicios y Maquinados</title>
 <meta name="description" content="Vista previa del sitio de CABA Servicios y Maquinados Industriales.">
 <style>
 {css}
-html, body {{ background: #ffffff; color: #1d1d1f; }}
+html, body {{ background: #eef1f4; color: #14171c; }}
 body {{ overflow-x: clip; }}
 </style>
 {body}
+<script type="module">
+{pill_js}
+</script>
 <script>
 {js}
 </script>
