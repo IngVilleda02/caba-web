@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { site } from "@/content/site";
 
 /**
  * Héroe «plano de taller»: titular corto y una foto de maquinado CNC.
@@ -7,11 +6,10 @@ import { site } from "@/content/site";
  */
 export function Hero() {
   return (
-    <section id="inicio" className="grid-paper relative pt-16">
+    <section id="inicio" className="grid-paper relative pt-16 lg:pt-20">
       <div className="mx-auto grid max-w-[1200px] gap-10 px-[max(16px,env(safe-area-inset-left))] pb-16 pt-12 lg:grid-cols-12 lg:items-center lg:gap-12 lg:pb-24 lg:pt-20">
         <div className="lg:col-span-6">
-          <p className="text-[17px] font-medium text-caba-600">Taller industrial en {site.city}</p>
-          <h1 className="mt-4 text-[52px] text-ink sm:text-[72px] lg:text-[88px]">
+          <h1 className="text-[52px] text-ink sm:text-[72px] lg:text-[88px]">
             Maquinados, estructuras y ensambles industriales.
           </h1>
           <p className="mt-6 max-w-[500px] text-pretty text-[19px] leading-[1.5] text-ink-2">

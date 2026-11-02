@@ -9,11 +9,11 @@ export function Header({ linkBase = "" }: { linkBase?: string }) {
       <a href="#contenido" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:bg-ink focus:px-3 focus:py-2 focus:text-white">
         Saltar al contenido
       </a>
-      <div className="mx-auto flex h-16 max-w-[1200px] items-center justify-between gap-6 px-[max(16px,env(safe-area-inset-left))]">
+      <div className="mx-auto flex h-16 max-w-[1200px] lg:h-20 items-center justify-between gap-6 px-[max(16px,env(safe-area-inset-left))]">
         <Link href="/" aria-label="CABA, inicio" className="shrink-0">
-          <Image src="/brand/logo-horizontal.svg" alt="CABA Servicios y Maquinados Industriales" width={235} height={40} priority unoptimized className="h-10 w-auto" />
+          <Image src="/brand/logo-horizontal.svg" alt="CABA Servicios y Maquinados Industriales" width={308} height={56} priority unoptimized className="h-10 w-auto lg:h-14" />
         </Link>
-        <nav aria-label="Principal" className="hidden items-center gap-8 md:flex">
+        <nav aria-label="Principal" className="hidden items-center gap-6 whitespace-nowrap md:flex lg:gap-8">
           {navigation.map((n) => (
             <a key={n.href} href={`${linkBase}${n.href}`} className="text-[15px] font-medium text-ink-2 transition-colors hover:text-ink">
               {n.label}

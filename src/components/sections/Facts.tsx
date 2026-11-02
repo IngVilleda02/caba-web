@@ -6,7 +6,7 @@ export function Facts() {
     { k: site.yearsLabel, v: "de operación" },
     { k: "A tu medida", v: "con el material que pidas" },
     { k: "Respuesta rápida", v: "en soporte y cotizaciones" },
-    { k: site.hours.label, v: site.hours.range },
+    { k: "Visita a planta", v: "revisamos en sitio antes de cotizar" },
   ];
   return (
     <section aria-label="Datos de CABA" className="border-y border-ink bg-sheet">

@@ -36,6 +36,7 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 4.5rem;
+  @media (min-width: 1024px) { scroll-padding-top: 5.75rem; }
   background: var(--color-paper);
 }
 
