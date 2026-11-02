@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "@fontsource/barlow/400.css";
 import "@fontsource/barlow/500.css";
 import "@fontsource/barlow/600.css";
@@ -36,6 +38,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
         {/* Interacción del sitio (menú, filtros, galería, formulario → WhatsApp) */}
         <Script src="/site.js" strategy="afterInteractive" />
+        {/* Medición de Vercel: visitas y velocidad real, sin cookies (se activan en el panel de Vercel) */}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

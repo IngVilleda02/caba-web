@@ -133,12 +133,70 @@ h1, h2, h3 {
   .field:focus { outline: none; border-bottom-color: var(--color-caba-500); background: var(--color-sheet); }
 }
 
+/* Superficies del navegador con la paleta del plano */
+html { scrollbar-color: var(--color-ink-3) var(--color-paper-2); accent-color: var(--color-caba-500); }
+input, textarea { caret-color: var(--color-caba-500); }
+
+/* ─────────────────────────────────────────────────────────────
+   Movimiento. Regla: una sola entrada (la pasada de herramienta del héroe);
+   lo demás solo responde a lo que hace el visitante (abrir, filtrar, enviar).
+   Nada aparece al hacer scroll: el contenido siempre está visible por defecto.
+   ───────────────────────────────────────────────────────────── */
+:root { --ease-tool: cubic-bezier(0.65, 0, 0.25, 1); }
+
+/* Héroe: una cubierta con la línea de corte amarilla al frente se retira de izquierda a derecha
+   y descubre la foto, como una pasada de herramienta. Un solo elemento con transform: va sincronizado. */
+.hero-tool {
+  background: var(--color-paper-2);
+  border-left: 3px solid var(--color-cota);
+  animation: hero-tool 950ms var(--ease-tool) 150ms both;
+}
+@keyframes hero-tool { from { transform: translateX(0); } to { transform: translateX(calc(100% + 4px)); } }
+
+/* Barra: aparece su regla de sombra al dejar el inicio */
+[data-nav] { transition: box-shadow 200ms var(--ease-out); }
+[data-nav].is-scrolled { box-shadow: 0 6px 18px -12px rgb(20 23 28 / 0.35); }
+
+/* Menú móvil: se despliega hacia abajo desde la barra */
+.menu-panel:not([hidden]) { animation: menu-in 240ms var(--ease-out); }
+.menu-panel:not([hidden]) a { animation: menu-link 280ms var(--ease-out) both; }
+.menu-panel a:nth-child(2) { animation-delay: 30ms; }
+.menu-panel a:nth-child(3) { animation-delay: 60ms; }
+.menu-panel a:nth-child(4) { animation-delay: 90ms; }
+.menu-panel a:nth-child(5) { animation-delay: 120ms; }
+@keyframes menu-in { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes menu-link { from { opacity: 0; transform: translateY(-6px); } }
+
+/* Filtros del portafolio: las tarjetas se reacomodan (View Transitions, ver site.js) */
+::view-transition-group(*) { animation-duration: 320ms; animation-timing-function: var(--ease-out); }
+::view-transition-old(*) { animation-duration: 140ms; }
+::view-transition-new(*) { animation-duration: 220ms; animation-delay: 80ms; }
+
 /* Galería (lightbox) */
 .lightbox[hidden] { display: none; }
-.lightbox { animation: lb-in 220ms var(--ease-out); }
+.lightbox { animation: lb-in 200ms var(--ease-out); }
+.lightbox.is-closing { animation: lb-out 140ms ease-in forwards; }
+.lb-img { animation: lb-img 260ms var(--ease-out); }
+.lb-img[data-dir="next"] { animation-name: lb-next; }
+.lb-img[data-dir="prev"] { animation-name: lb-prev; }
 @keyframes lb-in { from { opacity: 0; } }
+@keyframes lb-out { to { opacity: 0; } }
+@keyframes lb-img { from { opacity: 0; transform: scale(0.97); } }
+@keyframes lb-next { from { opacity: 0; transform: translateX(28px); } }
+@keyframes lb-prev { from { opacity: 0; transform: translateX(-28px); } }
+
+/* Formulario: el campo con error marca su línea en rojo; el aviso de envío entra suave */
+.field[aria-invalid="true"] { border-bottom-color: #c4161c; }
+.field[aria-invalid="true"]:focus { border-bottom-color: #c4161c; }
+.wa-ok:not([hidden]) { animation: wa-ok 320ms var(--ease-out); }
+@keyframes wa-ok { from { opacity: 0; transform: translateY(4px); } }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .lightbox { animation: none; }
+  /* Sin desplazamientos: la foto ya está descubierta; quedan solo cambios de opacidad y color */
+  .hero-tool, .menu-panel:not([hidden]), .menu-panel:not([hidden]) a { animation: none; }
+  .hero-tool { display: none; }
+  .lb-img, .lb-img[data-dir] { animation: lb-in 160ms ease-out; }
+  .wa-ok:not([hidden]) { animation: lb-in 160ms ease-out; }
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none; }
 }

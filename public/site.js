@@ -7,6 +7,7 @@
   "use strict";
   var $ = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
 
   /* Barra de navegación */
   var nav = $("[data-nav]");
@@ -31,13 +32,20 @@
   chips.forEach(function (chip) {
     chip.addEventListener("click", function () {
       var f = chip.getAttribute("data-filter");
+      if (chip.getAttribute("aria-pressed") === "true") return;
       chips.forEach(function (c) { c.setAttribute("aria-pressed", String(c === chip)); });
-      $$("[data-project]").forEach(function (card) {
-        var tags = card.getAttribute("data-services").split(" ");
-        card.hidden = !(f === "todos" || tags.indexOf(f) > -1);
-      });
+      function apply() {
+        $$("[data-project]").forEach(function (card) {
+          var tags = card.getAttribute("data-services").split(" ");
+          card.hidden = !(f === "todos" || tags.indexOf(f) > -1);
+        });
+      }
+      /* Las tarjetas que quedan se deslizan a su nuevo lugar en vez de saltar */
+      if (document.startViewTransition && !reduced.matches) document.startViewTransition(apply);
+      else apply();
     });
   });
+  $$("[data-project]").forEach(function (card, i) { card.style.viewTransitionName = "proyecto-" + i; });
 
   /* Galería con teclado y gestos */
   var lb = $("[data-lightbox]");
@@ -45,10 +53,12 @@
   var lbCap = lb && $("[data-lightbox-caption]", lb);
   var lbCount = lb && $("[data-lightbox-count]", lb);
   var gallery = [], index = 0, lastFocus = null;
-  function show(i) {
+  function show(i, dir) {
     index = (i + gallery.length) % gallery.length;
     var it = gallery[index];
     lbImg.src = it.src; lbImg.alt = it.alt;
+    /* La foto entra desde el lado hacia el que se avanza */
+    if (dir) lbImg.setAttribute("data-dir", dir); else lbImg.removeAttribute("data-dir");
     lbImg.style.animation = "none"; void lbImg.offsetWidth; lbImg.style.animation = "";
     lbCap.textContent = it.title + " — " + it.alt;
     lbCount.textContent = (index + 1) + " / " + gallery.length;
@@ -57,7 +67,18 @@
     gallery = items; lastFocus = trigger; lb.hidden = false; document.body.style.overflow = "hidden";
     show(i); $("[data-lightbox-close]", lb).focus();
   }
-  function closeLb() { lb.hidden = true; document.body.style.overflow = ""; if (lastFocus) lastFocus.focus(); }
+  var closing = null;
+  function closeLb() {
+    if (lb.hidden || closing) return;
+    function done() {
+      clearTimeout(closing); closing = null;
+      lb.classList.remove("is-closing"); lb.hidden = true;
+      document.body.style.overflow = ""; if (lastFocus) lastFocus.focus();
+    }
+    if (reduced.matches) return done();
+    lb.classList.add("is-closing");
+    closing = setTimeout(done, 150);
+  }
   $$("[data-gallery-open]").forEach(function (btn) {
     btn.addEventListener("click", function () {
       var card = btn.closest("[data-project]");
@@ -68,20 +89,20 @@
   });
   if (lb) {
     $("[data-lightbox-close]", lb).addEventListener("click", closeLb);
-    $("[data-lightbox-prev]", lb).addEventListener("click", function () { show(index - 1); });
-    $("[data-lightbox-next]", lb).addEventListener("click", function () { show(index + 1); });
+    $("[data-lightbox-prev]", lb).addEventListener("click", function () { show(index - 1, "prev"); });
+    $("[data-lightbox-next]", lb).addEventListener("click", function () { show(index + 1, "next"); });
     lb.addEventListener("click", function (e) { if (e.target === lb) closeLb(); });
     document.addEventListener("keydown", function (e) {
       if (lb.hidden) { if (e.key === "Escape") setMenu(false); return; }
       if (e.key === "Escape") closeLb();
-      if (e.key === "ArrowRight") show(index + 1);
-      if (e.key === "ArrowLeft") show(index - 1);
+      if (e.key === "ArrowRight") show(index + 1, "next");
+      if (e.key === "ArrowLeft") show(index - 1, "prev");
     });
     var x0 = null;
     lb.addEventListener("touchstart", function (e) { x0 = e.touches[0].clientX; }, { passive: true });
     lb.addEventListener("touchend", function (e) {
       if (x0 === null) return; var dx = e.changedTouches[0].clientX - x0;
-      if (Math.abs(dx) > 40) show(index + (dx < 0 ? 1 : -1)); x0 = null;
+      if (Math.abs(dx) > 40) show(index + (dx < 0 ? 1 : -1), dx < 0 ? "next" : "prev"); x0 = null;
     });
   }
 
@@ -129,7 +150,7 @@
       var url = "https://wa.me/" + form.getAttribute("data-wa-form") + "?text=" + encodeURIComponent(lines.join("\n"));
 
       window.open(url, "_blank", "noopener");
-      var ok = $("[data-wa-ok]", form); ok.hidden = false;
+      var ok = $("[data-wa-ok]", form); ok.hidden = true; void ok.offsetWidth; ok.hidden = false;
       ok.querySelector("a").href = url;
     });
 

@@ -22,7 +22,9 @@ export function Hero() {
         </div>
 
         <figure className="relative lg:col-span-6">
-          <div className="chamfer chamfer-lg relative aspect-[5/4] bg-paper-2">
+          {/* Única animación de entrada del sitio: la foto se descubre como una pasada de herramienta,
+              con la línea de corte amarilla al frente. Solo CSS; con movimiento reducido la foto aparece directa. */}
+          <div className="chamfer chamfer-lg relative aspect-[5/4] overflow-hidden bg-paper-2">
             <Image
               src="/portfolio/cnc-fresado.webp"
               alt="Fresado CNC de una pieza metálica con refrigerante"
@@ -32,6 +34,7 @@ export function Hero() {
               sizes="(min-width: 1024px) 50vw, 100vw"
               className="object-cover object-[45%_50%]"
             />
+            <span aria-hidden className="hero-tool pointer-events-none absolute inset-0" />
           </div>
         </figure>
       </div>

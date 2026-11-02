@@ -32,7 +32,7 @@ export function Projects() {
           </div>
         </div>
 
-        <div className="mt-12 grid gap-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+        <div data-project-grid className="mt-12 grid gap-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
           {projects.map((p) => (
             <article key={p.slug} data-project data-title={p.title} data-services={p.services.join(" ")} className="flex flex-col">
               <button
@@ -48,9 +48,9 @@ export function Projects() {
                   fill
                   unoptimized
                   sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                  className="object-cover transition-transform duration-700 ease-[var(--ease-out)] group-hover:scale-[1.03]"
+                  className="object-cover"
                 />
-                <span className="absolute bottom-0 right-0 bg-ink px-3 py-1.5 text-[13px] font-semibold text-white">{p.images.length} fotos</span>
+                <span className="absolute bottom-0 right-0 bg-ink px-3 py-1.5 text-[13px] font-semibold text-white transition-colors duration-150 group-hover:bg-cota group-hover:text-ink group-focus-visible:bg-cota group-focus-visible:text-ink">{p.images.length} fotos</span>
               </button>
 
               <div className="mt-3 flex gap-2">
@@ -104,7 +104,7 @@ export function Projects() {
         </div>
         <div className="relative flex min-h-0 flex-1 items-center justify-center py-4">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img alt="" className="chamfer max-h-full max-w-full object-contain" />
+          <img alt="" className="lb-img chamfer max-h-full max-w-full object-contain" />
           <button data-lightbox-prev type="button" aria-label="Foto anterior" className="absolute left-0 flex h-11 w-11 items-center justify-center bg-white/10 text-white hover:bg-white/20 sm:left-4">
             <Chevron dir="left" className="h-4 w-4" />
           </button>

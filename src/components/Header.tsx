@@ -39,7 +39,7 @@ export function Header({ linkBase = "" }: { linkBase?: string }) {
           </button>
         </div>
       </div>
-      <div id="menu-movil" hidden className="h-[calc(100dvh-64px)] border-t border-rule bg-paper px-6 pt-4 md:hidden">
+      <div id="menu-movil" hidden className="menu-panel h-[calc(100dvh-64px)] border-t border-rule bg-paper px-6 pt-4 md:hidden">
         <nav aria-label="Móvil" className="flex flex-col">
           {navigation.map((n) => (
             <a key={n.href} href={`${linkBase}${n.href}`} className="border-b border-rule py-4 font-display text-[32px] font-semibold text-ink">

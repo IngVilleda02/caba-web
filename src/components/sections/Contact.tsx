@@ -129,7 +129,7 @@ export function Contact() {
             <button type="submit" className="btn btn-primary mt-2 w-full sm:w-auto">
               <WhatsAppIcon className="h-[18px] w-[18px]" /> Enviar solicitud por WhatsApp
             </button>
-            <p data-wa-ok hidden className="mt-4 text-[15px] text-ink-2">
+            <p data-wa-ok hidden className="wa-ok mt-4 text-[15px] text-ink-2">
               Se abrió WhatsApp con tu solicitud; solo toca enviar. Si no se abrió, <a href="#" target="_blank" rel="noopener noreferrer" className="link-line">toca aquí</a>.
             </p>
           </form>
