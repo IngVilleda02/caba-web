@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { panelAccessUrl, panelUrl } from "./src/lib/panel";
 
 /**
  * Cabeceras de seguridad aplicadas a todas las rutas.
@@ -8,9 +9,7 @@ import type { NextConfig } from "next";
 const isDev = process.env.NODE_ENV !== "production";
 
 // Origen del panel de cotizaciones (para enviar las solicitudes del formulario).
-const panelOrigin = (() => {
-  try { return process.env.NEXT_PUBLIC_PANEL_LEADS_URL ? new URL(process.env.NEXT_PUBLIC_PANEL_LEADS_URL).origin : ""; } catch { return ""; }
-})();
+const panelOrigin = (() => { try { const u = panelUrl(); return u ? new URL(u).origin : ""; } catch { return ""; } })();
 
 const csp = [
   "default-src 'self'",
@@ -38,6 +37,11 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   images: { formats: ["image/avif", "image/webp"] },
+  /** /admin → acceso al panel con la identidad de CABA. Sin NEXT_PUBLIC_PANEL_URL no existe (404). */
+  async redirects() {
+    const target = panelAccessUrl();
+    return target ? [{ source: "/admin", destination: target, permanent: false }, { source: "/admin/:path*", destination: target, permanent: false }] : [];
+  },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },

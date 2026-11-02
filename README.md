@@ -35,9 +35,11 @@ teléfono, ubicación de la planta, servicio, fecha y horario preferidos y la ne
 arma una plantilla con esos datos y abre WhatsApp con el número del asesor: no necesita servidor ni correo.
 Los enlaces "Solicitar visita para…" de cada servicio preseleccionan el servicio en el formulario.
 
-**Panel de cotizaciones (MIRAI Panel):** si se define `NEXT_PUBLIC_PANEL_LEADS_URL` (la dirección que muestra el panel en
-*Empresa → Formulario del sitio web*), cada solicitud también se guarda en *Solicitudes* del panel. WhatsApp se abre igual;
-si el panel no responde, el cliente no nota nada. La política de seguridad (CSP) permite ese origen automáticamente.
+**Panel de cotizaciones (MIRAI Panel):** con la variable `NEXT_PUBLIC_PANEL_URL` (ej. `https://panel.mirainexus.com`):
+- `https://<sitio-de-caba>/admin` lleva al acceso del panel con el estilo de CABA (`/acceso/caba`). No hay enlaces visibles a esa dirección.
+- Cada solicitud del formulario también se guarda en *Solicitudes* del panel; WhatsApp se abre igual.
+- En el panel (*Empresa → Formulario del sitio web*) agrega el dominio del sitio a «Sitios permitidos».
+Sin la variable, `/admin` responde 404 y el formulario solo usa WhatsApp. El identificador de la empresa está en `src/lib/panel.ts`.
 Cuando el cliente tenga correo, se puede agregar envío por correo con Resend como en el sitio de MIRAI NEXUS.
 
 ## Logotipo

@@ -1,6 +1,7 @@
 import { mapsUrl, site, whatsappHref } from "@/content/site";
 import { services } from "@/content/services";
 import { WhatsAppIcon } from "@/components/Icons";
+import { panelLeadsUrl } from "@/lib/panel";
 
 /**
  * Contacto + solicitud de visita a planta. CABA cotiza después de ver la necesidad en sitio,
@@ -69,7 +70,7 @@ export function Contact() {
           <form
             id="visita"
             data-wa-form={site.whatsapp}
-            data-leads-endpoint={process.env.NEXT_PUBLIC_PANEL_LEADS_URL || undefined}
+            data-leads-endpoint={panelLeadsUrl() ?? undefined}
             noValidate
             className="relative scroll-mt-24 border border-ink bg-sheet p-7 sm:p-10 lg:col-span-7"
             aria-labelledby="visita-t"
