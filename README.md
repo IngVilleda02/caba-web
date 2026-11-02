@@ -35,11 +35,6 @@ teléfono, ubicación de la planta, servicio, fecha y horario preferidos y la ne
 arma una plantilla con esos datos y abre WhatsApp con el número del asesor: no necesita servidor ni correo.
 Los enlaces "Solicitar visita para…" de cada servicio preseleccionan el servicio en el formulario.
 
-**Panel de cotizaciones (MIRAI Panel):** con la variable `NEXT_PUBLIC_PANEL_URL` (ej. `https://panel.mirainexus.com`):
-- `https://<sitio-de-caba>/admin` lleva al acceso del panel con el estilo de CABA (`/acceso/caba`). No hay enlaces visibles a esa dirección.
-- Cada solicitud del formulario también se guarda en *Solicitudes* del panel; WhatsApp se abre igual.
-- En el panel (*Empresa → Formulario del sitio web*) agrega el dominio del sitio a «Sitios permitidos».
-Sin la variable, `/admin` responde 404 y el formulario solo usa WhatsApp. El identificador de la empresa está en `src/lib/panel.ts`.
 Cuando el cliente tenga correo, se puede agregar envío por correo con Resend como en el sitio de MIRAI NEXUS.
 
 ## Logotipo
@@ -47,17 +42,12 @@ Redibujado en vector a partir del original: engranes con dientes reales, letras 
 azul normalizado `#2F66B3` (original `#3367AD`), negro `#1D1D1F`, gris `#3A3A3C`.
 Versiones: `logo-full.svg` (fondo claro), `logo-full-dark.svg` (fondo oscuro), `logo-horizontal*.svg` (barra), `icon.svg`.
 
-## Publicar en Hostinger (sitio estático, recomendado)
-El sitio no necesita servidor: se sube como archivos a `public_html`.
-1. Revisa los dominios en `.env.production` (`NEXT_PUBLIC_SITE_URL` y `NEXT_PUBLIC_PANEL_URL`).
-2. `npm install` y `npm run build:hostinger` → genera la carpeta `out/` con su `.htaccess`
-   (HTTPS, dominio sin www, `/admin` → panel, cabeceras de seguridad, caché y página 404).
-3. En Hostinger → Sitios web → el dominio de CABA → Administrador de archivos → `public_html`:
-   sube el **contenido** de `out/` (incluido `.htaccess`, que es un archivo oculto).
-4. Cuando el sitio esté publicado, la tarjeta del portafolio de MIRAI NEXUS puede dejar de usar la imagen local.
-
-También funciona como app Node.js (Vercel o Hostinger): `npm run build` + `npm start`; ahí `/admin` y las cabeceras
-salen de `next.config.ts`.
+## Publicar en Vercel
+1. El código está en GitHub (repositorio `caba-web`).
+2. vercel.com → *Add New → Project* → importa el repositorio. Vercel detecta Next.js; no cambies la compilación.
+3. Variable: `NEXT_PUBLIC_SITE_URL` = la URL que da Vercel (ej. `https://caba-maquinados.vercel.app`). Después, *Redeploy*.
+4. Cada cambio que se sube a GitHub se publica solo.
+5. Pon esa URL en `src/content/projects.ts` del sitio de MIRAI NEXUS.
 
 ## Pendientes con el cliente
 - [ ] Confirmar por escrito que Topre Autoparts autoriza mostrar su nombre y las fotos tomadas en su planta.

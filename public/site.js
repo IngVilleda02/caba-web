@@ -128,21 +128,6 @@
       ];
       var url = "https://wa.me/" + form.getAttribute("data-wa-form") + "?text=" + encodeURIComponent(lines.join("\n"));
 
-      /* Copia al panel de cotizaciones (MIRAI Panel → Solicitudes). No bloquea ni reemplaza WhatsApp. */
-      var endpoint = form.getAttribute("data-leads-endpoint");
-      if (endpoint && window.fetch) {
-        try {
-          fetch(endpoint, {
-            method: "POST", mode: "cors", keepalive: true,
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              nombre: val("nombre"), empresa: val("empresa"), telefono: val("telefono"), ubicacion: val("ubicacion"),
-              servicio: val("servicio"), fecha: val("fecha"), horario: val("horario"), necesidad: val("necesidad"),
-              website: f.website ? f.website.value : "",
-            }),
-          }).catch(function () {});
-        } catch { /* sin conexión: WhatsApp sigue funcionando */ }
-      }
       window.open(url, "_blank", "noopener");
       var ok = $("[data-wa-ok]", form); ok.hidden = false;
       ok.querySelector("a").href = url;

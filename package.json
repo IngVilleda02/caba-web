@@ -9,8 +9,7 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "check": "tsc --noEmit && eslint . && next build",
-    "build:hostinger": "node scripts/build-hostinger.mjs"
+    "check": "tsc --noEmit && eslint . && next build"
   },
   "dependencies": {
     "@fontsource/barlow": "^5.3.0",

@@ -1,7 +1,6 @@
 import { mapsUrl, site, whatsappHref } from "@/content/site";
 import { services } from "@/content/services";
 import { WhatsAppIcon } from "@/components/Icons";
-import { panelLeadsUrl } from "@/lib/panel";
 
 /**
  * Contacto + solicitud de visita a planta. CABA cotiza después de ver la necesidad en sitio,
@@ -70,7 +69,6 @@ export function Contact() {
           <form
             id="visita"
             data-wa-form={site.whatsapp}
-            data-leads-endpoint={panelLeadsUrl() ?? undefined}
             noValidate
             className="relative scroll-mt-24 border border-ink bg-sheet p-7 sm:p-10 lg:col-span-7"
             aria-labelledby="visita-t"
@@ -127,8 +125,6 @@ export function Contact() {
                 <textarea id="necesidad" name="necesidad" rows={4} required placeholder="Pieza, estructura o ensamble, cantidad aproximada y para cuándo lo necesitas." className="field resize-y" />
               </div>
             </div>
-            {/* Campo trampa para bots: las personas no lo ven */}
-            <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden className="absolute -left-[9999px] h-0 w-0 opacity-0" />
             <p data-wa-error role="alert" className="mt-4 min-h-5 text-[15px] font-medium text-[#c4161c]" />
             <button type="submit" className="btn btn-primary mt-2 w-full sm:w-auto">
               <WhatsAppIcon className="h-[18px] w-[18px]" /> Enviar solicitud por WhatsApp

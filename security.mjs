@@ -1,20 +1,12 @@
-/**
- * Política de seguridad del sitio, compartida por next.config.ts (servidor Node/Vercel)
- * y por scripts/build-hostinger.mjs (que la escribe en .htaccess para el hosting estático).
- */
-export function panelOrigin(panelUrl) {
-  try { return panelUrl ? new URL(panelUrl).origin : ""; } catch { return ""; }
-}
-
-export function buildCsp({ dev = false, panelUrl = "" } = {}) {
-  const origin = panelOrigin(panelUrl);
+/** Política de seguridad del sitio (cabeceras que aplica next.config.ts). */
+export function buildCsp({ dev = false } = {}) {
   return [
     "default-src 'self'",
     `script-src 'self' 'unsafe-inline'${dev ? " 'unsafe-eval'" : ""}`,
     "style-src 'self' 'unsafe-inline'",
     "img-src 'self' data: blob: https:",
     "font-src 'self' data:",
-    `connect-src 'self'${origin ? ` ${origin}` : ""}`,
+    "connect-src 'self'",
     "frame-ancestors 'none'",
     "form-action 'self'",
     "base-uri 'self'",
