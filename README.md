@@ -34,6 +34,10 @@ CABA cotiza después de visitar la planta. El formulario (`Contact.tsx`, ancla `
 teléfono, ubicación de la planta, servicio, fecha y horario preferidos y la necesidad. Al enviar, `public/site.js`
 arma una plantilla con esos datos y abre WhatsApp con el número del asesor: no necesita servidor ni correo.
 Los enlaces "Solicitar visita para…" de cada servicio preseleccionan el servicio en el formulario.
+
+**Panel de cotizaciones (MIRAI Panel):** si se define `NEXT_PUBLIC_PANEL_LEADS_URL` (la dirección que muestra el panel en
+*Empresa → Formulario del sitio web*), cada solicitud también se guarda en *Solicitudes* del panel. WhatsApp se abre igual;
+si el panel no responde, el cliente no nota nada. La política de seguridad (CSP) permite ese origen automáticamente.
 Cuando el cliente tenga correo, se puede agregar envío por correo con Resend como en el sitio de MIRAI NEXUS.
 
 ## Logotipo

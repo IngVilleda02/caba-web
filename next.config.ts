@@ -7,6 +7,11 @@ import type { NextConfig } from "next";
  */
 const isDev = process.env.NODE_ENV !== "production";
 
+// Origen del panel de cotizaciones (para enviar las solicitudes del formulario).
+const panelOrigin = (() => {
+  try { return process.env.NEXT_PUBLIC_PANEL_LEADS_URL ? new URL(process.env.NEXT_PUBLIC_PANEL_LEADS_URL).origin : ""; } catch { return ""; }
+})();
+
 const csp = [
   "default-src 'self'",
   `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}`,
@@ -14,7 +19,7 @@ const csp = [
   // https: permite mostrar la imagen de vista previa de los sitios de clientes en el portafolio.
   "img-src 'self' data: blob: https:",
   "font-src 'self' data:",
-  "connect-src 'self'",
+  `connect-src 'self'${panelOrigin ? ` ${panelOrigin}` : ""}`,
   "frame-ancestors 'none'",
   "form-action 'self'",
   "base-uri 'self'",
