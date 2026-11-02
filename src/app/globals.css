@@ -132,12 +132,6 @@ h1, h2, h3 {
   .field:focus { outline: none; border-bottom-color: var(--color-caba-500); background: var(--color-sheet); }
 }
 
-/* Cotas sobre la foto principal: se dibujan una sola vez al cargar */
-.cota-line { stroke-dasharray: 220; stroke-dashoffset: 220; animation: cota-draw 900ms var(--ease-out) forwards; animation-delay: var(--d, 300ms); }
-.cota-label { opacity: 0; animation: cota-in 500ms var(--ease-out) forwards; animation-delay: calc(var(--d, 300ms) + 500ms); }
-@keyframes cota-draw { to { stroke-dashoffset: 0; } }
-@keyframes cota-in { to { opacity: 1; } }
-
 /* Galería (lightbox) */
 .lightbox[hidden] { display: none; }
 .lightbox { animation: lb-in 220ms var(--ease-out); }
@@ -145,7 +139,5 @@ h1, h2, h3 {
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .cota-line { animation: none; stroke-dashoffset: 0; }
-  .cota-label { animation: none; opacity: 1; }
   .lightbox { animation: none; }
 }

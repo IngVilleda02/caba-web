@@ -3,23 +3,23 @@ import { clients } from "@/content/projects";
 import { LineIcon } from "@/components/Icons";
 
 /**
- * Escena de planta: texto sobre azul plano y la foto a su tamaño real (sin estirarla),
- * para que se vea nítida. Para cambiarla, reemplaza `photo` por una imagen de ≥1600 px.
+ * Escena de planta: texto sobre azul plano y la foto al lado, sin estirarla.
+ * Para cambiarla, reemplaza `photo` (horizontal, ≥1500 px de ancho).
  */
-const photo = { src: "/portfolio/linea-soldadura.webp", width: 660, height: 1280, alt: "Línea de soldadura en una planta automotriz" };
+const photo = { src: "/portfolio/cnc-mesa.webp", width: 1536, height: 1024, alt: "Centro de maquinado CNC trabajando una pieza sujeta en chuck" };
 
 export function PlantScene() {
   return (
     <section aria-label="En planta" className="grid-blueprint bg-blueprint text-white">
       <div className="mx-auto grid max-w-[1200px] gap-10 px-[max(16px,env(safe-area-inset-left))] py-16 md:grid-cols-12 md:items-center md:gap-12 md:py-24">
-        <div className="md:col-span-7">
-          <h2 className="max-w-[620px] text-[48px] md:text-[72px]">Hecho para el ritmo de una línea automotriz.</h2>
+        <div className="md:col-span-5">
+          <h2 className="max-w-[620px] text-[48px] md:text-[56px] lg:text-[72px]">Hecho para el ritmo de una línea automotriz.</h2>
           <p className="mt-5 max-w-[520px] text-[18px] text-white/80">
             Atendemos a empresas automotrices y de manufactura en San Juan del Río y la región, con piezas y equipos que llegan listos para trabajar.
           </p>
         </div>
-        <div className="chamfer chamfer-lg relative mx-auto aspect-[4/5] w-full max-w-[480px] md:col-span-5 md:mx-0 md:justify-self-end">
-          <Image src={photo.src} alt={photo.alt} fill unoptimized sizes="(min-width: 768px) 480px, 100vw" className="object-cover object-[50%_45%]" />
+        <div className="chamfer chamfer-lg relative aspect-[3/2] w-full md:col-span-7">
+          <Image src={photo.src} alt={photo.alt} fill unoptimized sizes="(min-width: 768px) 60vw, 100vw" className="object-cover" />
         </div>
       </div>
     </section>

@@ -54,7 +54,7 @@ Versiones: `logo-full.svg` (fondo claro), `logo-full-dark.svg` (fondo oscuro), `
 - [ ] Capacidades del taller: marcas/modelos de torno y CNC, medidas máximas, tolerancias y materiales frecuentes.
 - [ ] Más fotos: piezas maquinadas sueltas, taller y equipo.
 - [ ] Nombres de las empresas que autorizaron aparecer en «Empresas que confían en nosotros» (`clients` en `src/content/projects.ts`).
-- [ ] Foto de línea automotriz de mayor resolución (≥1600 px) para la sección «Hecho para el ritmo…» (`photo` en `Story.tsx`).
+- [ ] Las fotos del inicio (`cnc-fresado.webp`) y de «Hecho para el ritmo…» (`cnc-mesa.webp`) son ilustrativas; cambiarlas por fotos del taller cuando las haya.
 - [ ] Redes sociales y dominio.
 - [ ] Fecha y revisión legal del aviso de privacidad.
 - [ ] Aprobación de la línea "Sitio desarrollado por MIRAI NEXUS" en el pie de página.
@@ -62,7 +62,7 @@ Versiones: `logo-full.svg` (fondo claro), `logo-full-dark.svg` (fondo oscuro), `
 ## Identidad visual «Plano de taller» (rediseño)
 Diseño propio derivado del logotipo y del mundo del cliente (no copia de ninguna marca):
 - **Chaflán** de la letra C del logotipo en fotos, botones y marcadores (`.chamfer` en `globals.css`).
-- **Cotas amarillas** sobre la foto principal que nombran las piezas, con el amarillo de los fixtures (`Hero.tsx`, arreglo `cotas`).
+- **Amarillo de cota** `#F2B705` (el de los fixtures) para estados y etiquetas.
 - **Retícula de plano** en secciones claras y **azul plano** `#0F2A4D` en las oscuras.
 - **Barlow Condensed** (títulos) + **Barlow** (texto), ambas autoalojadas.
 - Referencias de la skill popular-web-designs mezcladas: BMW (ángulos, contraste), IBM (entradas con línea inferior, un solo azul), HashiCorp (ritmo claro/oscuro).
