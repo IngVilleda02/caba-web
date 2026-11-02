@@ -47,11 +47,17 @@ Redibujado en vector a partir del original: engranes con dientes reales, letras 
 azul normalizado `#2F66B3` (original `#3367AD`), negro `#1D1D1F`, gris `#3A3A3C`.
 Versiones: `logo-full.svg` (fondo claro), `logo-full-dark.svg` (fondo oscuro), `logo-horizontal*.svg` (barra), `icon.svg`.
 
-## Publicar en Vercel
-1. Sube el proyecto a un repositorio de GitHub.
-2. En Vercel: *Add New → Project* → importa el repositorio.
-3. Variable: `NEXT_PUBLIC_SITE_URL` = la URL final (o la `.vercel.app` mientras no haya dominio).
-4. Cuando esté publicado, agrega la URL en `src/content/projects.ts` del sitio de MIRAI NEXUS.
+## Publicar en Hostinger (sitio estático, recomendado)
+El sitio no necesita servidor: se sube como archivos a `public_html`.
+1. Revisa los dominios en `.env.production` (`NEXT_PUBLIC_SITE_URL` y `NEXT_PUBLIC_PANEL_URL`).
+2. `npm install` y `npm run build:hostinger` → genera la carpeta `out/` con su `.htaccess`
+   (HTTPS, dominio sin www, `/admin` → panel, cabeceras de seguridad, caché y página 404).
+3. En Hostinger → Sitios web → el dominio de CABA → Administrador de archivos → `public_html`:
+   sube el **contenido** de `out/` (incluido `.htaccess`, que es un archivo oculto).
+4. Cuando el sitio esté publicado, la tarjeta del portafolio de MIRAI NEXUS puede dejar de usar la imagen local.
+
+También funciona como app Node.js (Vercel o Hostinger): `npm run build` + `npm start`; ahí `/admin` y las cabeceras
+salen de `next.config.ts`.
 
 ## Pendientes con el cliente
 - [ ] Confirmar por escrito que Topre Autoparts autoriza mostrar su nombre y las fotos tomadas en su planta.
